@@ -27,6 +27,8 @@ public class Tile : MonoBehaviour
     private float _colorTransitionTime;
     private float _elapsedDuration;
 
+    private int _scoreToAdd;
+
     public void Init(bool isOffset)
     {
         _tileColor = isOffset ? _offsetColor : _baseColor;
@@ -43,6 +45,8 @@ public class Tile : MonoBehaviour
             if (percentageComplete >= 1)
             {
                 _isFarmActive = false;
+                GameManager.PlayerScore += _scoreToAdd;
+                print(GameManager.PlayerScore);
                 _elapsedDuration = 0;
                 percentageComplete = 0;
             }
@@ -65,15 +69,18 @@ public class Tile : MonoBehaviour
         {
             case 1:
                 _plantColor = Color.blue;
-                _colorTransitionTime = 10f;
+                _colorTransitionTime = 1f;
+                _scoreToAdd = 1;
                 break;
             case 2:
                 _plantColor = Color.black;
                 _colorTransitionTime = 5f;
+                _scoreToAdd = 5;
                 break;
             case 3:
                 _plantColor = Color.gray;
-                _colorTransitionTime = 1f;
+                _colorTransitionTime = 10f;
+                _scoreToAdd = 10;
                 break;
         }
         _isFarmActive = true;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,9 +25,22 @@ public class GameManager : MonoBehaviour
         set { _selectedSeed = value; }
     }
 
+    private static int _playerScore;
+    public static int PlayerScore
+    {
+        get { return _playerScore; }
+        set { _playerScore = value; }
+    }
+
     void Start()
     {
         GenerateGrid();
+    }
+
+    void Update()
+    {
+        GameObject.Find("PlayerScore").GetComponent<TextMeshProUGUI>().text =
+            $"Score: {PlayerScore}";
     }
 
     void GenerateGrid()
