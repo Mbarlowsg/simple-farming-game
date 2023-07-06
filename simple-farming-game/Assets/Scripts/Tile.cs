@@ -40,6 +40,12 @@ public class Tile : MonoBehaviour
             _elapsedDuration += Time.deltaTime;
             float percentageComplete = _elapsedDuration / _colorTransitionTime;
             _renderer.color = Color.Lerp(_plantColor, _tileColor, percentageComplete);
+            if (percentageComplete >= 1)
+            {
+                _elapsedDuration = 0;
+                percentageComplete = 0;
+                _isFarmActive = false;
+            }
         }
     }
 
