@@ -14,6 +14,16 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Transform _camera;
 
+    [SerializeField]
+    private int[] _seeds = new int[3];
+
+    private static int _selectedSeed;
+    public static int SelectedSeed
+    {
+        get { return _selectedSeed; }
+        set { _selectedSeed = value; }
+    }
+
     void Start()
     {
         GenerateGrid();
@@ -35,8 +45,25 @@ public class GameManager : MonoBehaviour
 
         _camera.transform.position = new Vector3(
             (float)_width / 2 - 0.5f,
-            (float)_height / 2 - 0.5f,
-            -10
+            (float)_height / 2 - 1f,
+            -20
         );
+    }
+
+    public void SelectSeed(int seed)
+    {
+        switch (seed)
+        {
+            case 1:
+                _selectedSeed = _seeds[0];
+                break;
+            case 2:
+                _selectedSeed = _seeds[1];
+                break;
+            case 3:
+                _selectedSeed = _seeds[2];
+                break;
+        }
+        print($"Selected seed = {_selectedSeed}");
     }
 }

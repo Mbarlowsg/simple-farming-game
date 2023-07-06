@@ -24,7 +24,7 @@ public class Tile : MonoBehaviour
     private bool _isFarmActive = false;
 
     [SerializeField]
-    private float _colorTransitionTime = 3f;
+    private float _colorTransitionTime;
     private float _elapsedDuration;
 
     public void Init(bool isOffset)
@@ -42,9 +42,9 @@ public class Tile : MonoBehaviour
             _renderer.color = Color.Lerp(_plantColor, _tileColor, percentageComplete);
             if (percentageComplete >= 1)
             {
+                _isFarmActive = false;
                 _elapsedDuration = 0;
                 percentageComplete = 0;
-                _isFarmActive = false;
             }
         }
     }
@@ -61,6 +61,21 @@ public class Tile : MonoBehaviour
 
     void OnMouseDown()
     {
+        switch (GameManager.SelectedSeed)
+        {
+            case 1:
+                _plantColor = Color.blue;
+                _colorTransitionTime = 10f;
+                break;
+            case 2:
+                _plantColor = Color.black;
+                _colorTransitionTime = 5f;
+                break;
+            case 3:
+                _plantColor = Color.gray;
+                _colorTransitionTime = 1f;
+                break;
+        }
         _isFarmActive = true;
     }
 }
